@@ -363,14 +363,189 @@ namespace VotingSystem1._2
                                     Console.WriteLine(item.Value);
 
                                     Console.WriteLine("Искате ли да продължите с друг съветник? y/n");
-                                    var t = Console.ReadLine();
-                                    if (t == "y")
+                                    personalChoose = Console.ReadLine();
+                                    if (personalChoose == "y")
                                     {
                                         continue;
                                     }
                                     else
                                     {
-                                        break;
+                                        return;
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+                if (input == "bsp")
+                {
+                    BSP personal = new BSP();
+                    var infoToChoose = personal.PersonalInfo();
+                    Console.WriteLine(text1);
+                    Console.WriteLine(string.Join("\n", infoToChoose.Keys));
+
+                    while (true)
+                    {
+                        var personalChoose = Console.ReadLine();
+
+                        if (infoToChoose.ContainsKey(personalChoose))
+                        {
+                            foreach (var item in infoToChoose)
+                            {
+                                if (item.Key == personalChoose)
+                                {
+                                    Console.WriteLine(item.Value);
+
+                                    Console.WriteLine("Искате ли да продължите с друг съветник? y/n");
+                                    personalChoose = Console.ReadLine();
+                                    if (personalChoose == "y")
+                                    {
+                                        continue;
+                                    }
+                                    else
+                                    {
+                                        return;
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+                if (input == "dps")
+                {
+                    DPS personal = new DPS();
+                    var infoToChoose = personal.PersonalInfo();
+                    Console.WriteLine(text1);
+                    Console.WriteLine(string.Join("\n", infoToChoose.Keys));
+
+                    while (true)
+                    {
+                        var personalChoose = Console.ReadLine();
+
+                        if (infoToChoose.ContainsKey(personalChoose))
+                        {
+                            foreach (var item in infoToChoose)
+                            {
+                                if (item.Key == personalChoose)
+                                {
+                                    Console.WriteLine(item.Value);
+
+                                    Console.WriteLine("Искате ли да продължите с друг съветник? y/n");
+                                    personalChoose = Console.ReadLine();
+                                    if (personalChoose == "y")
+                                    {
+                                        continue;
+                                    }
+                                    else
+                                    {
+                                        return;
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+                if (input == "kauza")
+                {
+                    KauzaRz personal = new KauzaRz();
+                    var infoToChoose = personal.PersonalInfo();
+                    Console.WriteLine(text1);
+                    Console.WriteLine(string.Join("\n", infoToChoose.Keys));
+
+                    while (true)
+                    {
+                        var personalChoose = Console.ReadLine();
+
+                        if (infoToChoose.ContainsKey(personalChoose))
+                        {
+                            foreach (var item in infoToChoose)
+                            {
+                                if (item.Key == personalChoose)
+                                {
+                                    Console.WriteLine(item.Value);
+
+                                    Console.WriteLine("Искате ли да продължите с друг съветник? y/n");
+                                    personalChoose = Console.ReadLine();
+                                    if (personalChoose == "y")
+                                    {
+                                        continue;
+                                    }
+                                    else
+                                    {
+                                        return;
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+                if (input == "free")
+                {
+                    Free personal = new Free();
+                    var infoToChoose = personal.PersonalInfo();
+                    Console.WriteLine(text1);
+                    Console.WriteLine(string.Join("\n", infoToChoose.Keys));
+
+                    while (true)
+                    {
+                        var personalChoose = Console.ReadLine();
+
+                        if (infoToChoose.ContainsKey(personalChoose))
+                        {
+                            foreach (var item in infoToChoose)
+                            {
+                                if (item.Key == personalChoose)
+                                {
+                                    Console.WriteLine(item.Value);
+
+                                    Console.WriteLine("Искате ли да продължите с друг съветник? y/n");
+                                    personalChoose = Console.ReadLine();
+                                    if (personalChoose == "y")
+                                    {
+                                        continue;
+                                    }
+                                    else
+                                    {
+                                        return;
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+                if (input == "reforma")
+                {
+                    ReformBlog personal = new ReformBlog();
+                    var infoToChoose = personal.PersonalInfo();
+                    Console.WriteLine(text1);
+                    Console.WriteLine(string.Join("\n", infoToChoose.Keys));
+
+                    while (true)
+                    {
+                        var personalChoose = Console.ReadLine();
+
+                        if (infoToChoose.ContainsKey(personalChoose))
+                        {
+                            foreach (var item in infoToChoose)
+                            {
+                                if (item.Key == personalChoose)
+                                {
+                                    Console.WriteLine(item.Value);
+
+                                    Console.WriteLine("Искате ли да продължите с друг съветник? y/n");
+                                    personalChoose = Console.ReadLine();
+                                    if (personalChoose == "y")
+                                    {
+                                        continue;
+                                    }
+                                    else
+                                    {
+                                        return;
                                     }
 
                                 }
