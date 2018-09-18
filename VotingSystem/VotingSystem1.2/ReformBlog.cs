@@ -5,17 +5,23 @@ using System.Text;
 
 class ReformBlog
 {
+    private string mitko = "Митко Иванов Ханчев";
+    private string veselin = "Веселин Валентинов Спасов";
+    private string djipo = "Джипо Николов Джипов";
+    private string ivo = "Иво Борисов Димитров";
+    private string manuel  = "Мануел Василев Чутурков";
+
     public ReformBlog() { }
 
     public List<string> ListCol()
     {
         List<string> col = new List<string>();
 
-        col.Add("Митко Иванов Ханчев");
-        col.Add("Веселин Валентинов Спасов");
-        col.Add("Джипо Николов Джипов");
-        col.Add("Иво Борисов Димитров");
-        col.Add("Мануел Василев Чутурков");
+        col.Add(mitko);
+        col.Add(veselin);
+        col.Add(djipo);
+        col.Add(ivo);
+        col.Add(manuel);
         return col;
     }
 

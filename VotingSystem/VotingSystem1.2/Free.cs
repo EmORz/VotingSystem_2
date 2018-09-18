@@ -5,14 +5,20 @@ using System.Text;
 
 class Free
 {
+    private string fatme = "Фатме Селим Али";
+    private string milena = "Милена Дачева Орешкова";
+    private string reihan = "Рейхан Ридван Вели";
+    private string qnka = "Янка Трифонова Георгиева";
+
+   
     public Free() { }
     public List<string> ListCol()
     {
         List<string> col = new List<string>();
-        col.Add("Фатме Селим Али");
-        col.Add("Милена Дачева Орешкова");
-        col.Add("Рейхан Ридван Вели");
-        col.Add("Янка Трифонова Георгиева");
+        col.Add(fatme);
+        col.Add(milena);
+        col.Add(reihan);
+        col.Add(qnka);
         return col;
     }
 

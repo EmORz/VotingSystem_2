@@ -5,6 +5,12 @@ using System.Text;
 
 class BSP
 {
+    private string elka = "Елка Александрова Неделчева";
+    private string iliq = "Илия Христов Илиев";
+    private string diana = "Диана Добромирова Мирчева";
+    private string stoqn = "Стоян Димитров Ненчев";
+    private string tanq = "Таня Петрова Тодорова";
+
     public BSP()
     { }
 
@@ -12,11 +18,11 @@ class BSP
     {
         List<string> col = new List<string>();
 
-        col.Add("Елка Александрова Неделчева");
-        col.Add("Илия Христов Илиев");
-        col.Add("Диана Добромирова Мирчева");
-        col.Add("Стоян Димитров Ненчев");
-        col.Add("Таня Петрова Тодорова");
+        col.Add(elka);
+        col.Add(iliq);
+        col.Add(diana);
+        col.Add(stoqn);
+        col.Add(tanq);
         return col;
     }
     public Dictionary<string, string> PersonalInfo()

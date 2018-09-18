@@ -4,15 +4,19 @@ using System.Text;
 
 class KauzaRz
 {
+    private string bojinel = "Божинел Василев Христов";
+    private string vladimir = "Владимир Димитров Димитров";
+    private string kaloqn = "Калоян Руменов Монев";
+
     public KauzaRz() { }
 
     public List<string> ListCol()
     {
         List<string> col = new List<string>();
 
-        col.Add("Божинел Василев Христов");
-        col.Add("Владимир Димитров Димитров");
-        col.Add("Калоян Руменов Монев");
+        col.Add(bojinel);
+        col.Add(vladimir);
+        col.Add(kaloqn);
         return col;
     }
     public Dictionary<string, string> PersonalInfo()

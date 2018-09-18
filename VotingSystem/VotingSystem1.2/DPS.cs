@@ -4,6 +4,13 @@ using System.Text;
 
 class DPS
 {
+    private string levent = "Левент Али Апти";
+    private string ahter = "Ахтер Исметов Чилев";
+    private string emine = "Емине Бейти Хасан";
+    private string fatme = "Фатме Зелкиф Емин";
+    private string hami = "Хами Ибрахимов Хамиев";
+    private string hasan = "Хасан Халилов Хасанов";
+
     public DPS()
     { }
 
@@ -11,12 +18,12 @@ class DPS
     {
         List<string> col = new List<string>();
 
-        col.Add("Левент Али Апти");
-        col.Add("Ахтер Исметов Чилев");
-        col.Add("Емине Бейти Хасан");
-        col.Add("Фатме Зелкиф Емин");
-        col.Add("Хами Ибрахимов Хамиев");
-        col.Add("Хасан Халилов Хасанов");
+        col.Add(levent);
+        col.Add(ahter);
+        col.Add(emine);
+        col.Add(fatme);
+        col.Add(hami);
+        col.Add(hasan);
 
         return col;
     }

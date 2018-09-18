@@ -349,34 +349,8 @@ namespace VotingSystem1._2
                     var infoToChoose = personal.PersonalInfo();
                     Console.WriteLine(text1);
                     Console.WriteLine(string.Join("\n", infoToChoose.Keys));
-
-                    while (true)
-                    {
-                        var personalChoose = Console.ReadLine();
-
-                        if (infoToChoose.ContainsKey(personalChoose))
-                        {
-                            foreach (var item in infoToChoose)
-                            {
-                                if (item.Key == personalChoose)
-                                {
-                                    Console.WriteLine(item.Value);
-
-                                    Console.WriteLine("Искате ли да продължите с друг съветник? y/n");
-                                    personalChoose = Console.ReadLine();
-                                    if (personalChoose == "y")
-                                    {
-                                        continue;
-                                    }
-                                    else
-                                    {
-                                        return;
-                                    }
-
-                                }
-                            }
-                        }
-                    }
+                    GetPersonalInfo(infoToChoose);
+                    return;
                 }
                 if (input == "bsp")
                 {
@@ -384,34 +358,9 @@ namespace VotingSystem1._2
                     var infoToChoose = personal.PersonalInfo();
                     Console.WriteLine(text1);
                     Console.WriteLine(string.Join("\n", infoToChoose.Keys));
+                    GetPersonalInfo(infoToChoose);
+                    return;
 
-                    while (true)
-                    {
-                        var personalChoose = Console.ReadLine();
-
-                        if (infoToChoose.ContainsKey(personalChoose))
-                        {
-                            foreach (var item in infoToChoose)
-                            {
-                                if (item.Key == personalChoose)
-                                {
-                                    Console.WriteLine(item.Value);
-
-                                    Console.WriteLine("Искате ли да продължите с друг съветник? y/n");
-                                    personalChoose = Console.ReadLine();
-                                    if (personalChoose == "y")
-                                    {
-                                        continue;
-                                    }
-                                    else
-                                    {
-                                        return;
-                                    }
-
-                                }
-                            }
-                        }
-                    }
                 }
                 if (input == "dps")
                 {
@@ -419,34 +368,8 @@ namespace VotingSystem1._2
                     var infoToChoose = personal.PersonalInfo();
                     Console.WriteLine(text1);
                     Console.WriteLine(string.Join("\n", infoToChoose.Keys));
-
-                    while (true)
-                    {
-                        var personalChoose = Console.ReadLine();
-
-                        if (infoToChoose.ContainsKey(personalChoose))
-                        {
-                            foreach (var item in infoToChoose)
-                            {
-                                if (item.Key == personalChoose)
-                                {
-                                    Console.WriteLine(item.Value);
-
-                                    Console.WriteLine("Искате ли да продължите с друг съветник? y/n");
-                                    personalChoose = Console.ReadLine();
-                                    if (personalChoose == "y")
-                                    {
-                                        continue;
-                                    }
-                                    else
-                                    {
-                                        return;
-                                    }
-
-                                }
-                            }
-                        }
-                    }
+                    GetPersonalInfo(infoToChoose);
+                    return;
                 }
                 if (input == "kauza")
                 {
@@ -454,34 +377,8 @@ namespace VotingSystem1._2
                     var infoToChoose = personal.PersonalInfo();
                     Console.WriteLine(text1);
                     Console.WriteLine(string.Join("\n", infoToChoose.Keys));
-
-                    while (true)
-                    {
-                        var personalChoose = Console.ReadLine();
-
-                        if (infoToChoose.ContainsKey(personalChoose))
-                        {
-                            foreach (var item in infoToChoose)
-                            {
-                                if (item.Key == personalChoose)
-                                {
-                                    Console.WriteLine(item.Value);
-
-                                    Console.WriteLine("Искате ли да продължите с друг съветник? y/n");
-                                    personalChoose = Console.ReadLine();
-                                    if (personalChoose == "y")
-                                    {
-                                        continue;
-                                    }
-                                    else
-                                    {
-                                        return;
-                                    }
-
-                                }
-                            }
-                        }
-                    }
+                    GetPersonalInfo(infoToChoose);
+                    return;
                 }
                 if (input == "free")
                 {
@@ -489,34 +386,8 @@ namespace VotingSystem1._2
                     var infoToChoose = personal.PersonalInfo();
                     Console.WriteLine(text1);
                     Console.WriteLine(string.Join("\n", infoToChoose.Keys));
-
-                    while (true)
-                    {
-                        var personalChoose = Console.ReadLine();
-
-                        if (infoToChoose.ContainsKey(personalChoose))
-                        {
-                            foreach (var item in infoToChoose)
-                            {
-                                if (item.Key == personalChoose)
-                                {
-                                    Console.WriteLine(item.Value);
-
-                                    Console.WriteLine("Искате ли да продължите с друг съветник? y/n");
-                                    personalChoose = Console.ReadLine();
-                                    if (personalChoose == "y")
-                                    {
-                                        continue;
-                                    }
-                                    else
-                                    {
-                                        return;
-                                    }
-
-                                }
-                            }
-                        }
-                    }
+                    GetPersonalInfo(infoToChoose);
+                    return;
                 }
                 if (input == "reforma")
                 {
@@ -524,39 +395,45 @@ namespace VotingSystem1._2
                     var infoToChoose = personal.PersonalInfo();
                     Console.WriteLine(text1);
                     Console.WriteLine(string.Join("\n", infoToChoose.Keys));
+                    GetPersonalInfo(infoToChoose);
+                    return;
 
-                    while (true)
-                    {
-                        var personalChoose = Console.ReadLine();
-
-                        if (infoToChoose.ContainsKey(personalChoose))
-                        {
-                            foreach (var item in infoToChoose)
-                            {
-                                if (item.Key == personalChoose)
-                                {
-                                    Console.WriteLine(item.Value);
-
-                                    Console.WriteLine("Искате ли да продължите с друг съветник? y/n");
-                                    personalChoose = Console.ReadLine();
-                                    if (personalChoose == "y")
-                                    {
-                                        continue;
-                                    }
-                                    else
-                                    {
-                                        return;
-                                    }
-
-                                }
-                            }
-                        }
-                    }
                 }
             }
             if (enter == "3")
             {
                 Console.WriteLine("Благодарим Ви, че използвате Системата!");
+            }
+        }
+
+        private static void GetPersonalInfo(Dictionary<string, string> infoToChoose)
+        {
+            while (true)
+            {
+                var personalChoose = Console.ReadLine();
+
+                if (infoToChoose.ContainsKey(personalChoose))
+                {
+                    foreach (var item in infoToChoose)
+                    {
+                        if (item.Key == personalChoose)
+                        {
+                            Console.WriteLine(item.Value);
+
+                            Console.WriteLine("Искате ли да продължите с друг съветник? y/n");
+                            personalChoose = Console.ReadLine();
+                            if (personalChoose == "y")
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                return;
+                            }
+
+                        }
+                    }
+                }
             }
         }
 
