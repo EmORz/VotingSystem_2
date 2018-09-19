@@ -343,7 +343,7 @@ namespace VotingSystem1._2
                 Console.WriteLine(string.Join("\n", politicanGroup));
                 var input = Console.ReadLine();
 
-                if (input == "gerb")
+                if (input == politicanGroup[0])
                 {
                     GERB personal = new GERB();
                     var infoToChoose = personal.PersonalInfo();
@@ -352,7 +352,7 @@ namespace VotingSystem1._2
                     GetPersonalInfo(infoToChoose);
                     return;
                 }
-                if (input == "bsp")
+                if (input == politicanGroup[1])
                 {
                     BSP personal = new BSP();
                     var infoToChoose = personal.PersonalInfo();
@@ -362,7 +362,7 @@ namespace VotingSystem1._2
                     return;
 
                 }
-                if (input == "dps")
+                if (input == politicanGroup[2])
                 {
                     DPS personal = new DPS();
                     var infoToChoose = personal.PersonalInfo();
@@ -371,7 +371,7 @@ namespace VotingSystem1._2
                     GetPersonalInfo(infoToChoose);
                     return;
                 }
-                if (input == "kauza")
+                if (input == politicanGroup[4])
                 {
                     KauzaRz personal = new KauzaRz();
                     var infoToChoose = personal.PersonalInfo();
@@ -380,7 +380,7 @@ namespace VotingSystem1._2
                     GetPersonalInfo(infoToChoose);
                     return;
                 }
-                if (input == "free")
+                if (input == politicanGroup[5])
                 {
                     Free personal = new Free();
                     var infoToChoose = personal.PersonalInfo();
@@ -389,7 +389,7 @@ namespace VotingSystem1._2
                     GetPersonalInfo(infoToChoose);
                     return;
                 }
-                if (input == "reforma")
+                if (input == politicanGroup[3])
                 {
                     ReformBlog personal = new ReformBlog();
                     var infoToChoose = personal.PersonalInfo();
@@ -439,12 +439,12 @@ namespace VotingSystem1._2
 
         private static void AddToArchive(byte gerbCountN, byte bspCountN, byte dpsCountN, byte reformaCountN, byte kauzaCountN, byte freeCountN)
         {
-            File.AppendAllText(path, "GERB => " + gerbCountN + "\n");
-            File.AppendAllText(path, "BSP => " + bspCountN + "\n");
-            File.AppendAllText(path, "DPS => " + dpsCountN + "\n");
-            File.AppendAllText(path, "Reforma => " + reformaCountN + "\n");
-            File.AppendAllText(path, "Kauza => " + kauzaCountN + "\n");
-            File.AppendAllText(path, "Free => " + freeCountN + "\n");
+            File.AppendAllText(path, politicanGroup[0] + gerbCountN + "\n");
+            File.AppendAllText(path, politicanGroup[1] + bspCountN + "\n");
+            File.AppendAllText(path, politicanGroup[2] + dpsCountN + "\n");
+            File.AppendAllText(path, politicanGroup[3] + reformaCountN + "\n");
+            File.AppendAllText(path, politicanGroup[4] + kauzaCountN + "\n");
+            File.AppendAllText(path, politicanGroup[5] + freeCountN + "\n");
         }
 
         private static void VotingRezult(int p, int nega, int neutr)
@@ -490,12 +490,12 @@ namespace VotingSystem1._2
         }
         private static void Print(byte gerbCountN, byte bspCountN, byte dpsCountN, byte reformaCountN,byte kauzaCountN, byte freeCountN)
         {
-            Console.WriteLine("GERB => " + gerbCountN);
-            Console.WriteLine("BSP => " + bspCountN);
-            Console.WriteLine("DPS => " + dpsCountN);
-            Console.WriteLine("Reforma => " + reformaCountN);
-            Console.WriteLine("Kauza => " + kauzaCountN);
-            Console.WriteLine("Free => " + freeCountN);
+            Console.WriteLine($"{politicanGroup[0]} => " + gerbCountN);
+            Console.WriteLine($"{politicanGroup[1]} => " + bspCountN);
+            Console.WriteLine($"{politicanGroup[2]} => " + dpsCountN);
+            Console.WriteLine($"{politicanGroup[3]} => " + reformaCountN);
+            Console.WriteLine($"{politicanGroup[4]} => " + kauzaCountN);
+            Console.WriteLine($"{politicanGroup[5]} => " + freeCountN);
         }
         private static void GetVote(List<string> kvorum, List<string> data, byte[] f, int i, byte n)
         {
