@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 
@@ -10,6 +11,8 @@ class ReformBlog
     private string djipo = "Джипо Николов Джипов";
     private string ivo = "Иво Борисов Димитров";
     private string manuel  = "Мануел Василев Чутурков";
+    private string[] fileWorkedPlace = File.ReadAllLines(@"E:\Push\VotingSystem_2\VotingSystem\VotingSystem1.2\Reforma_Works.txt");
+
 
     public ReformBlog() { }
 
@@ -30,13 +33,11 @@ class ReformBlog
         var temp = new Dictionary<string, string>();
         ReformBlog n = new ReformBlog();
         var listCouncils = n.ListCol();
-
-        temp.Add(listCouncils[0], "Месторабота: Кооперация „Екип 7“\nОбразование: Висше - магистър\nСпециалност: Българска филология ");
-        temp.Add(listCouncils[1], "Месторабота: „Разград-полиграф“ гр.Разград\nОбразование: Висше\nСпециалност:  „Мениджмънт / Управление на предприятията“ ");
-        temp.Add(listCouncils[2], "Месторабота: „МАТ“ ООД\nОбразование: Висше\nСпециалност: „Строителен инженер“");
-        temp.Add(listCouncils[3], "Месторабота: ЕТ Богитех – Иво Димитров Разград\nОбразование: Висше\nСпециалност: „Електроника и автоматика“");
-        temp.Add(listCouncils[4], "Месторабота: ППМГ „ Акад. Н. Обрешков“\nОбразование: висше - магистър\nСпециалност: история, география, право");
-
+        temp.Add(listCouncils[0],fileWorkedPlace[0]);
+        temp.Add(listCouncils[1],fileWorkedPlace[1]);
+        temp.Add(listCouncils[2],fileWorkedPlace[2]);
+        temp.Add(listCouncils[3],fileWorkedPlace[3]);
+        temp.Add(listCouncils[4],fileWorkedPlace[4]);
         return temp;
     }
 

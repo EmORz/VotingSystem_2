@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 class DPS
@@ -10,6 +11,8 @@ class DPS
     private string fatme = "Фатме Зелкиф Емин";
     private string hami = "Хами Ибрахимов Хамиев";
     private string hasan = "Хасан Халилов Хасанов";
+    private string[] fileWorkedPlace = File.ReadAllLines(@"E:\Push\VotingSystem_2\VotingSystem\VotingSystem1.2\DPS_Works.txt");
+
 
     public DPS()
     { }
@@ -32,12 +35,12 @@ class DPS
         var temp = new Dictionary<string, string>();
         DPS n = new DPS();
         var listCouncils = n.ListCol();
-        temp.Add(listCouncils[0], "Месторабота: МБАЛ „Св. Иван Рилски“ гр. Разград\nОбразование: Висше - медицина\nСпециалност: „Анестезиология и интензивно лечение“");
-        temp.Add(listCouncils[1], "Месторабота: Д-р „Чилев Дент АПМП-ИП“ ЕООД\nОбразование: Висше - магистър\nСпециалност: „Дентална медицина“ ");
-        temp.Add(listCouncils[2], "Месторабота: „ХИЕМ“ ЕООД, с.Дянково\nОбразование: Средно - специално\nСпециалност: „Икономика“");
-        temp.Add(listCouncils[3], "Месторабота: Образование: Средно образование");
-        temp.Add(listCouncils[4], "Месторабота: „Фус Агро“ ООД, гр. Русе\nОбразование: Висше - магистър\nСпециалност: Агроном");
-        temp.Add(listCouncils[5], "Месторабота: Образование: Висше - бакалавър\nСпециалност: Учител математика и физика");
+        temp.Add(listCouncils[0], fileWorkedPlace[0]);
+        temp.Add(listCouncils[1], fileWorkedPlace[1]);
+        temp.Add(listCouncils[2], fileWorkedPlace[2]);
+        temp.Add(listCouncils[3], fileWorkedPlace[3]);
+        temp.Add(listCouncils[4], fileWorkedPlace[4]);
+        temp.Add(listCouncils[5], fileWorkedPlace[5]);
         return temp;
     }
 }

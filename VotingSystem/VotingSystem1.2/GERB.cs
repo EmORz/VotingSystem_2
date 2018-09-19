@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-
+using System.IO;
 
 class GERB
 {
@@ -13,8 +13,9 @@ class GERB
     private string nasko = "Наско Стоилов Анастасов";
     private string svetoslav = "Светослав Теофилов Банков";
     private string stefan = "Стефан Димов Стефанов";
-
-
+   
+    private string[] fileWorkedPlace = File.ReadAllLines(@"E:\Push\VotingSystem_2\VotingSystem\VotingSystem1.2\GERB_Works.txt");
+   
     public GERB() { }
 
     public  List<string> ListCol ()
@@ -37,16 +38,16 @@ class GERB
     public Dictionary<string, string> PersonalInfo()
     {
         var temp = new Dictionary<string, string>();
-        temp.Add(radiana, "Месторабота: „ЗД Евроинс” АД София\nОбразование: Висше - магистър\nСпециалност: Икономист, инженер - химик");
-        temp.Add(valentina, "Месторабота: Областна Дирекция „Земеделие“ Разград\nОбразование: Висше - магистър\nСпециалност: „Управление на международни бизнес проекти“");
-        temp.Add(galin, "Месторабота: СОУ „Христо Ботев“ гр. Разград\nОбразование: Висше\nСпециалност: „Начална педагогика“");
-        temp.Add(gulver, "Месторабота: Руж-Дил ЕООД, с.Ясеновец Образование: Средно Специалност: Елетротехник");
-        temp.Add(marian, "Месторабота: „СТМ-Вита“ гр.Разград\nОбразование: Висше - бакалавър\nСпециалност: „Индустриален - мениджмънт“");
-        temp.Add(marina, "Месторабота: „Биовет“ Разград\nОбразование: Висше - магистър\nСпециалност: „Аграрна икономика“");
-        temp.Add(nadejda, "Месторабота: Председател на Общински съвет\nОбразование: Висше\nСпециалност: Музикална педагогика");
-        temp.Add(nasko, "Месторабота: „Виталис“ ЕООД, гр. Разград\nОбразование: Висше\nСпециалност: инженер - слаботокова система");
-        temp.Add(svetoslav, "Месторабота:\nОбразование: висше\nСпециалност: „Технология на храните“");
-        temp.Add(stefan, "Месторабота: „Холидей Н.Ю.С“ ООД\nОбразование: Висше - магистър\nСпециалност: Технология на силикатите");
+        temp.Add(radiana, fileWorkedPlace[0]);
+        temp.Add(valentina, fileWorkedPlace[1]);
+        temp.Add(galin, fileWorkedPlace[2]);
+        temp.Add(gulver, fileWorkedPlace[3]);
+        temp.Add(marian, fileWorkedPlace[4]);
+        temp.Add(marina, fileWorkedPlace[5]);
+        temp.Add(nadejda, fileWorkedPlace[6]);
+        temp.Add(nasko, fileWorkedPlace[7]);
+        temp.Add(svetoslav, fileWorkedPlace[8]);
+        temp.Add(stefan, fileWorkedPlace[9]);
         return temp;
     }
 

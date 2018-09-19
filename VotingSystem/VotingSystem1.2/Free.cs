@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 
@@ -9,9 +10,10 @@ class Free
     private string milena = "Милена Дачева Орешкова";
     private string reihan = "Рейхан Ридван Вели";
     private string qnka = "Янка Трифонова Георгиева";
+    private string[] fileWorkedPlace = File.ReadAllLines(@"E:\Push\VotingSystem_2\VotingSystem\VotingSystem1.2\Free_Works.txt");
 
-   
     public Free() { }
+
     public List<string> ListCol()
     {
         List<string> col = new List<string>();
@@ -27,11 +29,10 @@ class Free
         var temp = new Dictionary<string, string>();
         Free n = new Free();
         var listCouncils = n.ListCol();
-
-        temp.Add(listCouncils[0], "Месторабота: ОП „Паркстрой“ гр.Разград\nОбразование: Висше\nСпециалност: Инженер - педагог ");
-        temp.Add(listCouncils[1], "Месторабота: ОУ „Иван С. Тургенев“ гр. Разград\nОбразование: Висше –магистър\nСпециалност: История, философия, политология, организация и управлени ");
-        temp.Add(listCouncils[2], "Месторабота: „Елит Сат Нет“ ООД, гр.Русе\nОбразование: Висше - магистър\nСпециалност: Компютърни системи и мрежи");
-        temp.Add(listCouncils[3], "Месторабота: „Домашен социален патронаж“\nОбразование: Висше - магистър\nСпециалност: „Социален мениджмънт“ ");
+        temp.Add(listCouncils[0],fileWorkedPlace[0]);
+        temp.Add(listCouncils[1],fileWorkedPlace[1]);
+        temp.Add(listCouncils[2],fileWorkedPlace[2]);
+        temp.Add(listCouncils[3],fileWorkedPlace[3]);
         return temp;
     }
 }

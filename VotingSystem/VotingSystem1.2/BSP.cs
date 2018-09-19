@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 
@@ -10,6 +11,8 @@ class BSP
     private string diana = "Диана Добромирова Мирчева";
     private string stoqn = "Стоян Димитров Ненчев";
     private string tanq = "Таня Петрова Тодорова";
+    private string[] fileWorkedPlace = File.ReadAllLines(@"E:\Push\VotingSystem_2\VotingSystem\VotingSystem1.2\BSP_Works.txt");
+
 
     public BSP()
     { }
@@ -31,11 +34,11 @@ class BSP
         BSP n = new BSP();
         var listCouncils = n.ListCol();
 
-        temp.Add(listCouncils[0], "Месторабота: ОУ „Георги Сава Раковски“, с.Раковски\nОбразование: Висше - мaгистър\nСпециалност: „Филология“");
-        temp.Add(listCouncils[1], "Месторабота: ОП „Паркстрой“, гр.Разград\nОбразование: Висше\nСпециалност: „География“ ");
-        temp.Add(listCouncils[2], "Месторабота: Андрея ЕООД\nОбразование: Висше - мaгистър\nСпециалност: „Електроинженер“");
-        temp.Add(listCouncils[3], "Месторабота: Образование: Висше - магистър\nСпециалност: Право");
-        temp.Add(listCouncils[4], "Месторабота: Образование: Висше\nСпециалност: „История“");
+        temp.Add(listCouncils[0], fileWorkedPlace[0]);
+        temp.Add(listCouncils[1], fileWorkedPlace[1]);
+        temp.Add(listCouncils[2], fileWorkedPlace[2]);
+        temp.Add(listCouncils[3], fileWorkedPlace[3]);
+        temp.Add(listCouncils[4], fileWorkedPlace[4]);
        
         return temp;
     }
