@@ -81,7 +81,7 @@ namespace VotingSystem1._2
                         GetValueOfCalculate(toName, kauza, person, kauzaB);
                     }
                 }
-                var result = kvorum.Count > 16 ? "Има кворум" : $"Няма кворум, нужни са още/поне {16 - kvorum.Count} гласа!";
+                var result = kvorum.Count >= 16 ? "Има кворум" : $"Няма кворум, нужни са още/поне {16 - kvorum.Count} гласа!";
                 File.AppendAllText(path, result);
                 Console.WriteLine(label);
                 Console.WriteLine("Присъстват по партийни групи:");
@@ -104,7 +104,7 @@ namespace VotingSystem1._2
                 File.AppendAllText(path, $"Гласували общо: {count}" + "\n");
                 Console.WriteLine($"{result}");
                 File.AppendAllText(path, $"{result}" + "\n");
-                Console.WriteLine($"Присъстват следните съветници: "+kvorum.Count+"Общ брой на регистрираните");
+                Console.WriteLine($"Присъстват следните съветници: "+kvorum.Count+" => Общ брой на регистрираните");
                 for (int i = 0; i < kvorum.Count; i++)
                 {
                     Console.WriteLine($"{i} => {kvorum[i]}");
@@ -140,184 +140,198 @@ namespace VotingSystem1._2
                     var freeCountN = new byte[3] { 0, 0, 0 };
                     while (askAction != "No")
                     {
-                        for (int i = 0; i < kvorum.Count; i++)
+                        Documents doc = new Documents();
+                        doc.Count();
+                        var pcDoc = doc.Counter();
+                        
+                        while (pcDoc>0)
                         {
-                            Console.Write(kvorum[i] + " => ");
-                            var voting = Console.ReadLine();
-                            Console.WriteLine(voting);
-                            byte n = 0;
-                            if (voting == "z")
+                            Console.WriteLine("Doklad => "+pcDoc);
+                            for (int i = 0; i < kvorum.Count; i++)
                             {
-                                positive.Add(a, kvorum[i]);
+                                Console.Write(kvorum[i] + " => ");
+                                var voting = Console.ReadLine();
+                                Console.WriteLine(voting);
+                                byte n = 0;
+                                if (voting == "z")
+                                {
+                                    positive.Add(a, kvorum[i]);
 
-                                GetV(kvorum, gerb, gerbCountN, i);
-                                GetV(kvorum, bsp, bspCountN, i);
-                                GetV(kvorum, dps, dpsCountN, i);
-                                GetV(kvorum, reforma, reformaCountN, i);
-                                GetV(kvorum, nezavisim, freeCountN, i);
-                                GetV(kvorum, kauza, kauzaCountN, i);
-                                a++;
+                                    GetV(kvorum, gerb, gerbCountN, i);
+                                    GetV(kvorum, bsp, bspCountN, i);
+                                    GetV(kvorum, dps, dpsCountN, i);
+                                    GetV(kvorum, reforma, reformaCountN, i);
+                                    GetV(kvorum, nezavisim, freeCountN, i);
+                                    GetV(kvorum, kauza, kauzaCountN, i);
+                                    a++;
+                                }
+                                if (voting == "p")
+                                {
+                                    negative.Add(b, kvorum[i]);
+                                    GetV2(kvorum, gerb, gerbCountN, i);
+                                    GetV2(kvorum, bsp, bspCountN, i);
+                                    GetV2(kvorum, dps, dpsCountN, i);
+                                    GetV2(kvorum, nezavisim, freeCountN, i);
+                                    GetV2(kvorum, reforma, reformaCountN, i);
+                                    GetV2(kvorum, kauza, kauzaCountN, i);
+                                    b++;
+                                }
+                                if (voting == "v")
+                                {
+                                    neutral.Add(c, kvorum[i]);
+                                    GetV3(kvorum, gerb, gerbCountN, i);
+                                    GetV3(kvorum, bsp, bspCountN, i);
+                                    GetV3(kvorum, dps, dpsCountN, i);
+                                    GetV3(kvorum, nezavisim, freeCountN, i);
+                                    GetV3(kvorum, reforma, reformaCountN, i);
+                                    GetV3(kvorum, kauza, kauzaCountN, i);
+                                    c++;
+                                }
+                                else
+                                {
+                                    continue;
+                                }
                             }
-                            if (voting == "p")
+                            Console.WriteLine(label);
+                            Console.WriteLine("Резултат от гласуването =>");
+
+                            Console.WriteLine("За");
+                            File.AppendAllText(path, "За" + "\n");
+                            if (positive.Count() != 0)
                             {
-                                negative.Add(b, kvorum[i]);
-                                GetV2(kvorum, gerb, gerbCountN, i);
-                                GetV2(kvorum, bsp, bspCountN, i);
-                                GetV2(kvorum, dps, dpsCountN, i);
-                                GetV2(kvorum, nezavisim, freeCountN, i);
-                                GetV2(kvorum, reforma, reformaCountN, i);
-                                GetV2(kvorum, kauza, kauzaCountN, i);
-                                b++;
-                            }
-                            if (voting == "v")
-                            {
-                                neutral.Add(c, kvorum[i]);
-                                GetV3(kvorum, gerb, gerbCountN, i);
-                                GetV3(kvorum, bsp, bspCountN, i);
-                                GetV3(kvorum, dps, dpsCountN, i);
-                                GetV3(kvorum, nezavisim, freeCountN, i);
-                                GetV3(kvorum, reforma, reformaCountN, i);
-                                GetV3(kvorum, kauza, kauzaCountN, i);
-                                c++;
+                                foreach (var za in positive)
+                                {
+                                    Console.Write($"{za.Key} => ");
+                                    foreach (var item in za.Value)
+                                    {
+                                        Console.Write($"{item}");
+                                        File.AppendAllText(path, $"{item}");
+                                    }
+                                    Console.WriteLine();
+                                }
                             }
                             else
                             {
-                                continue;
+                                Console.Write(" => " + 0);
                             }
-                        }
-                        Console.WriteLine(label);
-                        Console.WriteLine("Резултат от гласуването =>");
-
-                        Console.WriteLine("За");
-                        File.AppendAllText(path, "За" + "\n");
-                        if (positive.Count() != 0)
-                        {
-                            foreach (var za in positive)
+                            Console.WriteLine("Против");
+                            File.AppendAllText(path, "Против" + "\n");
+                            if (negative.Count() != 0)
                             {
-                                Console.Write($"{za.Key} => ");
-                                foreach (var item in za.Value)
+                                foreach (var protiv in negative)
                                 {
-                                    Console.Write($"{item}");
-                                    File.AppendAllText(path, $"{item}");
+                                    Console.Write($"{protiv.Key} => ");
+                                    foreach (var item in protiv.Value)
+                                    {
+                                        Console.Write(item);
+                                        File.AppendAllText(path, item.ToString());
+                                    }
+                                    Console.WriteLine();
                                 }
-                                Console.WriteLine();
                             }
-                        }
-                        else
-                        {
-                            Console.Write(" => " + 0);
-                        }
-                        Console.WriteLine("Против");
-                        File.AppendAllText(path, "Против" + "\n");
-                        if (negative.Count() != 0)
-                        {
-                            foreach (var protiv in negative)
+                            else
                             {
-                                Console.Write($"{protiv.Key} => ");
-                                foreach (var item in protiv.Value)
-                                {
-                                    Console.Write(item);
-                                    File.AppendAllText(path, item.ToString());
-                                }
-                                Console.WriteLine();
+                                Console.Write(" => " + 0);
                             }
-                        }
-                        else
-                        {
-                            Console.Write(" => " + 0);
-                        }
-                        Console.WriteLine("Въздържал се");
-                        File.AppendAllText(path, "Въздържал се" + "\n");
-                        if (neutral.Count() != 0)
-                        {
-                            foreach (var pass in neutral)
+                            Console.WriteLine("Въздържал се");
+                            File.AppendAllText(path, "Въздържал се" + "\n");
+                            if (neutral.Count() != 0)
                             {
-                                Console.Write($"{pass.Key} => ");
-                                foreach (var item in pass.Value)
+                                foreach (var pass in neutral)
                                 {
-                                    Console.Write(item);
-                                    File.AppendAllText(path, item.ToString());
-
+                                    Console.Write($"{pass.Key} => ");
+                                    foreach (var item in pass.Value)
+                                    {
+                                        Console.Write(item);
+                                        File.AppendAllText(path, item.ToString());
+                                    }
+                                    Console.WriteLine();
                                 }
-                                Console.WriteLine();
+                            }
+                            else
+                            {
+                                Console.Write(" => " + 0);
+                            }
+                            Console.WriteLine(label);
+
+                            var isOk = positive.Count() > kvorum.Count / 2;
+                            var p = positive.Count() == 0 ? 0 : positive.Count();
+                            var nega = negative.Count() == 0 ? 0 : negative.Count();
+                            var neutr = neutral.Count() == 0 ? 0 : neutral.Count();
+
+                            Console.WriteLine(label);
+
+                            if (isOk)
+                            {
+                                Console.WriteLine("Докладната се приема!");
+                                File.AppendAllText(path, "Докладната се приема!");
+                                VotingRezult(p, nega, neutr);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Докладната се отхвърля!");
+                                File.AppendAllText(path, "Докладната се отхвърля!\n");
+                                VotingRezult(p, nega, neutr);
+                            }
+                            Console.WriteLine(label);
+                            Console.WriteLine("По политически групи:");
+                            File.AppendAllText(path, "По политически групи:\n");
+                            Console.WriteLine(label);
+                            Console.WriteLine("За");
+                            File.AppendAllText(path, "За\n");
+                            Print(gerbCountN[0], bspCountN[0], dpsCountN[0], reformaCountN[0], kauzaCountN[0], freeCountN[0]);
+                            AddToArchive(gerbCountN[0], bspCountN[0], dpsCountN[0], reformaCountN[0], kauzaCountN[0], freeCountN[0]);
+                            //
+                            Console.WriteLine("Против");
+                            File.AppendAllText(path, "Против");
+                            Print(gerbCountN[1], bspCountN[1], dpsCountN[1], reformaCountN[1], kauzaCountN[1], freeCountN[1]);
+                            AddToArchive(gerbCountN[1], bspCountN[1], dpsCountN[1], reformaCountN[1], kauzaCountN[1], freeCountN[1]);
+                            //
+                            Console.WriteLine("Въздържал се:");
+                            File.AppendAllText(path, "Въздържал се:");
+                            Print(gerbCountN[2], bspCountN[2], dpsCountN[2], reformaCountN[2], kauzaCountN[2], freeCountN[2]);
+                            AddToArchive(gerbCountN[2], bspCountN[2], dpsCountN[2], reformaCountN[2], kauzaCountN[2], freeCountN[2]);
+                            Console.WriteLine(label);
+                            File.AppendAllText(path, DateTime.Now.ToString() + "\n");
+                            Console.ReadKey();
+                            Console.WriteLine("Желате ли да започнете ново гласуване ? Yes/No");
+                            //зануляване на стойностите.
+                            positive.Clear();
+                            neutral.Clear();
+                            negative.Clear();
+                            for (int i = 0; i < gerbCountN.Length; i++)
+                            {
+                                gerbCountN[i] = 0;
+                            }
+                            for (int i = 0; i < bspCountN.Length; i++)
+                            {
+                                bspCountN[i] = 0;
+                            }
+                            for (int i = 0; i < dpsCountN.Length; i++)
+                            {
+                                dpsCountN[i] = 0;
+                            }
+                            for (int i = 0; i < reformaCountN.Length; i++)
+                            {
+                                reformaCountN[i] = 0;
+                            }
+                            for (int i = 0; i < kauzaCountN.Length; i++)
+                            {
+                                kauzaCountN[i] = 0;
+                            }
+                            for (int i = 0; i < freeCountN.Length; i++)
+                            {
+                                freeCountN[i] = 0;
+                            }
+                            askAction = Console.ReadLine();
+                            pcDoc--;
+                            if (pcDoc<=0)
+                            {
+                                Console.WriteLine("Документите свършиха!");
+                                return;
                             }
                         }
-                        else
-                        {
-                            Console.Write(" => " + 0);
-                        }
-                        Console.WriteLine(label);
-
-                        var isOk = positive.Count() > kvorum.Count / 2;
-                        var p = positive.Count() == 0 ? 0 : positive.Count();
-                        var nega = negative.Count() == 0 ? 0 : negative.Count();
-                        var neutr = neutral.Count() == 0 ? 0 : neutral.Count();
-
-                        Console.WriteLine(label);
-
-                        if (isOk)
-                        {
-                            Console.WriteLine("Докладната се приема!");
-                            File.AppendAllText(path, "Докладната се приема!");
-                            VotingRezult(p, nega, neutr);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Докладната се отхвърля!");
-                            File.AppendAllText(path, "Докладната се отхвърля!\n");
-                            VotingRezult(p, nega, neutr);
-                        }
-                        Console.WriteLine(label);
-                        Console.WriteLine("По политически групи:");
-                        File.AppendAllText(path, "По политически групи:\n");
-                        Console.WriteLine(label);
-                        Console.WriteLine("За");
-                        File.AppendAllText(path, "За\n");
-                        Print(gerbCountN[0], bspCountN[0], dpsCountN[0], reformaCountN[0], kauzaCountN[0], freeCountN[0]);
-                        AddToArchive(gerbCountN[0], bspCountN[0], dpsCountN[0], reformaCountN[0], kauzaCountN[0], freeCountN[0]);
-                        //
-                        Console.WriteLine("Против");
-                        File.AppendAllText(path, "Против");
-                        Print(gerbCountN[1], bspCountN[1], dpsCountN[1], reformaCountN[1], kauzaCountN[1], freeCountN[1]);
-                        AddToArchive(gerbCountN[1], bspCountN[1], dpsCountN[1], reformaCountN[1], kauzaCountN[1], freeCountN[1]);
-                        //
-                        Console.WriteLine("Въздържал се:");
-                        File.AppendAllText(path, "Въздържал се:");
-                        Print(gerbCountN[2], bspCountN[2], dpsCountN[2], reformaCountN[2], kauzaCountN[2], freeCountN[2]);
-                        AddToArchive(gerbCountN[2], bspCountN[2], dpsCountN[2], reformaCountN[2], kauzaCountN[2], freeCountN[2]);
-                        Console.WriteLine(label);
-                        File.AppendAllText(path, DateTime.Now.ToString() + "\n");
-                        Console.ReadKey();
-                        Console.WriteLine("Желате ли да започнете ново гласуване ? Yes/No");
-                        //зануляване на стойностите.
-                        positive.Clear();
-                        neutral.Clear();
-                        negative.Clear();
-                        for (int i = 0; i < gerbCountN.Length; i++)
-                        {
-                            gerbCountN[i] = 0;
-                        }
-                        for (int i = 0; i < bspCountN.Length; i++)
-                        {
-                            bspCountN[i] = 0;
-                        }
-                        for (int i = 0; i < dpsCountN.Length; i++)
-                        {
-                            dpsCountN[i] = 0;
-                        }
-                        for (int i = 0; i < reformaCountN.Length; i++)
-                        {
-                            reformaCountN[i] = 0;
-                        }
-                        for (int i = 0; i < kauzaCountN.Length; i++)
-                        {
-                            kauzaCountN[i] = 0;
-                        }
-                        for (int i = 0; i < freeCountN.Length; i++)
-                        {
-                            freeCountN[i] = 0;
-                        }
-                        askAction = Console.ReadLine();
+       
                     }
                 }
                 Console.ReadKey();
@@ -417,7 +431,8 @@ namespace VotingSystem1._2
                             Console.WriteLine(item.Value);
                             Console.WriteLine("Искате ли да продължите с друг съветник? y/n");
                             personalChoose = (Console.ReadLine());
-                            if (personalChoose == "y")
+                            var whatWilDoing = personalChoose == "y" ? true : false;
+                            if (whatWilDoing)
                             {
                                 continue;
                             }
