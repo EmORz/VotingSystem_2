@@ -13,15 +13,24 @@ namespace VotingSystem1._2
         public static string text1 = "Персонална информация за съветниците. Изберете съветник:";
         public static string label = "..................................................";
         public static List<string> politicanGroup = new List<string>();
-        
+        public static Dictionary<string, List<string>> delegateByPolitician = new Dictionary<string, List<string>>();
+        public static List<string> kvorum = new List<string>();
+
+        public static List<string> gerbB = new List<string>();
+        public static List<string> bspB = new List<string>();
+        public static List<string> dpsB = new List<string>();
+        public static List<string> reformB = new List<string>();
+        public static List<string> kauzaB = new List<string>();
+        public static List<string> freeB = new List<string>();
+
         static void Main(string[] args)
         {
             politicanGroup.Add("ГЕРБ");
             politicanGroup.Add("БСП");
             politicanGroup.Add("ДПС");
-            politicanGroup.Add("Реформа");
-            politicanGroup.Add("Кауза");
-            politicanGroup.Add("Независими");
+            politicanGroup.Add("Реформаторкси блоk");
+            politicanGroup.Add("Кауза Разград");
+            politicanGroup.Add("Независими съветници");
             //
             GERB gerbb = new GERB();
             BSP bspp = new BSP();
@@ -29,6 +38,7 @@ namespace VotingSystem1._2
             KauzaRz kauzaa = new KauzaRz();
             Free freee = new Free();
             ReformBlog reformBlogg = new ReformBlog();
+  
             //
             Labelnfo1();
             var enter = Console.ReadLine();
@@ -38,7 +48,6 @@ namespace VotingSystem1._2
                 var allCouncilMan = gerbb.ListCol().Concat(bspp.ListCol().Concat(dpss.ListCol().Concat(kauzaa.ListCol().Concat(freee.ListCol().Concat(reformBlogg.ListCol())))));
                 string[] allCouncilArr = allCouncilMan.ToArray();
                 //
-                List<string> kvorum = new List<string>();
                 string[] toName = allCouncilArr;
                 List<string> take = toName.ToList();
                 //
@@ -49,7 +58,6 @@ namespace VotingSystem1._2
                 var nezavisim = freee.ListCol();
                 var kauza = kauzaa.ListCol();
 
-                Dictionary<string, List<string>> delegateByPoliticians = new Dictionary<string, List<string>>();
                 byte count = 0;
                 //Kvorum => string za potvyrjdenie => Tuk
                 for (int person = 0; person < all; person++)
@@ -65,8 +73,12 @@ namespace VotingSystem1._2
                         kvorum.Add($"{toName[person]}");
                         File.AppendAllText(path, toName[person]);
                         take.Remove(toName[person]);
-                        //
-                        TakeInfoForPartAndPerson(gerbb, bspp, dpss, kauzaa, freee, reformBlogg, toName, delegateByPoliticians, person);
+                        GetValueOfCalculate(toName, gerb, person, gerbB);
+                        GetValueOfCalculate(toName, bsp, person, bspB);
+                        GetValueOfCalculate(toName, dps, person, dpsB);
+                        GetValueOfCalculate(toName, reforma, person, reformB);
+                        GetValueOfCalculate(toName, nezavisim, person, freeB);
+                        GetValueOfCalculate(toName, kauza, person, kauzaB);
                     }
                 }
                 var result = kvorum.Count > 16 ? "Има кворум" : $"Няма кворум, нужни са още/поне {16 - kvorum.Count} гласа!";
@@ -74,51 +86,42 @@ namespace VotingSystem1._2
                 Console.WriteLine(label);
                 Console.WriteLine("Присъстват по партийни групи:");
                 File.AppendAllText(path, "Присъстват по партийни групи:");
-
-                var tempC = 0;
-                foreach (var party in delegateByPoliticians)
-                {
-                    Console.WriteLine(party.Key);
-                    File.AppendAllText(path, party.Key);
-
-                    foreach (var person in party.Value)
-                    {
-                        tempC++;
-                        Console.WriteLine($"{tempC}. " + person);
-                        File.AppendAllText(path, $"{tempC}. " + person + "\n");
-                    }
-                    Console.WriteLine();
-                }
+                var message = "Няма регистрирани съветници";
+                Console.WriteLine(politicanGroup[0]);
+                Console.WriteLine(gerbB.Count>0? string.Join("=>\n", gerbB):message);            
+                Console.WriteLine(politicanGroup[1]);             
+                Console.WriteLine(bspB.Count>0? string.Join("=>\n", bspB):message);               
+                Console.WriteLine(politicanGroup[2]);
+                Console.WriteLine(dpsB.Count>0? string.Join("=>\n", dpsB): message);
+                Console.WriteLine(politicanGroup[3]);
+                Console.WriteLine(reformB.Count>0? string.Join("=>\n", reformB):message);
+                Console.WriteLine(politicanGroup[4]);
+                Console.WriteLine(kauzaB.Count>0? string.Join("=>\n", kauzaB):message);
+                Console.WriteLine(politicanGroup[5]);
+                Console.WriteLine(freeB.Count>0? string.Join("=>\n", freeB):message);       
                 Console.WriteLine(label);
-
                 Console.WriteLine($"Гласували общо: {count}");
                 File.AppendAllText(path, $"Гласували общо: {count}" + "\n");
-
                 Console.WriteLine($"{result}");
                 File.AppendAllText(path, $"{result}" + "\n");
-                Console.WriteLine($"Присъстват следните съветници:");
+                Console.WriteLine($"Присъстват следните съветници: "+kvorum.Count+"Общ брой на регистрираните");
                 for (int i = 0; i < kvorum.Count; i++)
                 {
                     Console.WriteLine($"{i} => {kvorum[i]}");
                 }
                 File.AppendAllText(path, $"Присъстват следните съветници => \n" + string.Join($"\n=>", kvorum));
-                Console.WriteLine($"Отсъстват следните съветници =>");
-                File.AppendAllText(path, $"Отсъстват следните съветници =>");
-                var countMising = 1;
+                Console.WriteLine($"Отсъстват следните съветници => "+take.Count+" => Общ брой на отсъстващите");
+                File.AppendAllText(path, $"Отсъстват следните съветници => "+take.Count);                
                 for (int i = 0; i < take.Count; i++)
                 {
-                    Console.WriteLine($"{countMising++} => {take[i]}");
-                    File.AppendAllText(path, $"{countMising++} => {take[i]}" + "\n");
-
+                    Console.WriteLine($"{i} => {take[i]}");                   
+                    File.AppendAllText(path, $"{i} => {take[i]}" + "\n");
                 }
                 Console.WriteLine(label);
                 Dictionary<byte, string> positive = new Dictionary<byte, string>();
                 Dictionary<byte, string> negative = new Dictionary<byte, string>();
                 Dictionary<byte, string> neutral = new Dictionary<byte, string>();
-
                 byte a = 1; byte b = 1; byte c = 1; ;
-
-
                 if (kvorum.Count > 16)
                 {
                     Console.WriteLine("Заседанието има кворум и докладните могат да се гласуват!");
@@ -128,17 +131,13 @@ namespace VotingSystem1._2
                     //че за да се приеме докладна трябва да има >50% от гласовете на делегатите.
                     Console.WriteLine("Желате ли да започнете гласуването? Yes/No" + $"\nИмате кворум от => {kvorum.Count} делегата!");
                     File.AppendAllText(path, "Желате ли да започнете гласуването? Yes/No" + $"\nИмате кворум от => {kvorum.Count} делегата!" + "\n");
-
-
                     var askAction = Console.ReadLine();
-
                     var gerbCountN = new byte[3] { 0, 0, 0 };
                     var bspCountN = new byte[3] { 0, 0, 0 };
                     var dpsCountN = new byte[3] { 0, 0, 0 };
                     var reformaCountN = new byte[3] { 0, 0, 0 };
                     var kauzaCountN = new byte[3] { 0, 0, 0 };
                     var freeCountN = new byte[3] { 0, 0, 0 };
-
                     while (askAction != "No")
                     {
                         for (int i = 0; i < kvorum.Count; i++)
@@ -191,17 +190,15 @@ namespace VotingSystem1._2
 
                         Console.WriteLine("За");
                         File.AppendAllText(path, "За" + "\n");
-
                         if (positive.Count() != 0)
                         {
                             foreach (var za in positive)
                             {
-                                Console.Write($"{za.Key} поредност на вота => ");
+                                Console.Write($"{za.Key} => ");
                                 foreach (var item in za.Value)
                                 {
                                     Console.Write($"{item}");
                                     File.AppendAllText(path, $"{item}");
-
                                 }
                                 Console.WriteLine();
                             }
@@ -212,17 +209,15 @@ namespace VotingSystem1._2
                         }
                         Console.WriteLine("Против");
                         File.AppendAllText(path, "Против" + "\n");
-
                         if (negative.Count() != 0)
                         {
                             foreach (var protiv in negative)
                             {
-                                Console.Write($"{protiv.Key} поредност на вота => ");
+                                Console.Write($"{protiv.Key} => ");
                                 foreach (var item in protiv.Value)
                                 {
                                     Console.Write(item);
                                     File.AppendAllText(path, item.ToString());
-
                                 }
                                 Console.WriteLine();
                             }
@@ -233,12 +228,11 @@ namespace VotingSystem1._2
                         }
                         Console.WriteLine("Въздържал се");
                         File.AppendAllText(path, "Въздържал се" + "\n");
-
                         if (neutral.Count() != 0)
                         {
                             foreach (var pass in neutral)
                             {
-                                Console.Write($"{pass.Key} поредност на вота => ");
+                                Console.Write($"{pass.Key} => ");
                                 foreach (var item in pass.Value)
                                 {
                                     Console.Write(item);
@@ -266,21 +260,17 @@ namespace VotingSystem1._2
                             Console.WriteLine("Докладната се приема!");
                             File.AppendAllText(path, "Докладната се приема!");
                             VotingRezult(p, nega, neutr);
-
                         }
                         else
                         {
                             Console.WriteLine("Докладната се отхвърля!");
                             File.AppendAllText(path, "Докладната се отхвърля!\n");
                             VotingRezult(p, nega, neutr);
-
                         }
                         Console.WriteLine(label);
-
                         Console.WriteLine("По политически групи:");
                         File.AppendAllText(path, "По политически групи:\n");
                         Console.WriteLine(label);
-
                         Console.WriteLine("За");
                         File.AppendAllText(path, "За\n");
                         Print(gerbCountN[0], bspCountN[0], dpsCountN[0], reformaCountN[0], kauzaCountN[0], freeCountN[0]);
@@ -299,7 +289,6 @@ namespace VotingSystem1._2
                         File.AppendAllText(path, DateTime.Now.ToString() + "\n");
                         Console.ReadKey();
                         Console.WriteLine("Желате ли да започнете ново гласуване ? Yes/No");
-
                         //зануляване на стойностите.
                         positive.Clear();
                         neutral.Clear();
@@ -397,12 +386,19 @@ namespace VotingSystem1._2
                     Console.WriteLine(string.Join("\n", infoToChoose.Keys));
                     GetPersonalInfo(infoToChoose);
                     return;
-
                 }
             }
             if (enter == "3")
             {
                 Console.WriteLine("Благодарим Ви, че използвате Системата!");
+            }
+        }
+
+        private static void GetValueOfCalculate(string[] toName, List<string> gerb, int person, List<string> temporal)
+        {
+            if (gerb.Contains(toName[person]))
+            {
+                temporal.Add(toName[person]);
             }
         }
 
@@ -419,9 +415,8 @@ namespace VotingSystem1._2
                         if (item.Key == personalChoose)
                         {
                             Console.WriteLine(item.Value);
-
                             Console.WriteLine("Искате ли да продължите с друг съветник? y/n");
-                            personalChoose = Console.ReadLine();
+                            personalChoose = (Console.ReadLine());
                             if (personalChoose == "y")
                             {
                                 continue;
@@ -430,7 +425,6 @@ namespace VotingSystem1._2
                             {
                                 return;
                             }
-
                         }
                     }
                 }
@@ -502,57 +496,6 @@ namespace VotingSystem1._2
             if (data.Contains(kvorum[i]))
             {
                 f[n]++;
-            }
-        }
-        private static void TakeInfoForPartAndPerson(GERB gerbb, BSP bspp, DPS dpss, KauzaRz kauzaa, Free freee, ReformBlog reformBlogg, string[] toName, Dictionary<string, List<string>> delegateByPoliticians, int person)
-        {
-            if (gerbb.ListCol().Contains(toName[person]))
-            {
-                if (!delegateByPoliticians.ContainsKey("ГЕРБ"))
-                {
-                    delegateByPoliticians.Add("ГЕРБ", new List<string>());
-                }
-                delegateByPoliticians["ГЕРБ"].Add(toName[person]);
-            }
-            else if (dpss.ListCol().Contains(toName[person]))
-            {
-                if (!delegateByPoliticians.ContainsKey("Движение за права и свободи"))
-                {
-                    delegateByPoliticians.Add("Движение за права и свободи", new List<string>());
-                }
-                delegateByPoliticians["Движение за права и свободи"].Add(toName[person]);
-            }
-            else if (bspp.ListCol().Contains(toName[person]))
-            {
-                if (!delegateByPoliticians.ContainsKey("Българска социалистическа партия"))
-                {
-                    delegateByPoliticians.Add("Българска социалистическа партия", new List<string>());
-                }
-                delegateByPoliticians["Българска социалистическа партия"].Add(toName[person]);
-            }
-            else if (reformBlogg.ListCol().Contains(toName[person]))
-            {
-                if (!delegateByPoliticians.ContainsKey("Реформаторски блок"))
-                {
-                    delegateByPoliticians.Add("Реформаторски блок", new List<string>());
-                }
-                delegateByPoliticians["Реформаторски блок"].Add(toName[person]);
-            }
-            else if (kauzaa.ListCol().Contains(toName[person]))
-            {
-                if (!delegateByPoliticians.ContainsKey("Кауза Разград"))
-                {
-                    delegateByPoliticians.Add("Кауза Разград", new List<string>());
-                }
-                delegateByPoliticians["Кауза Разград"].Add(toName[person]);
-            }
-            else if (freee.ListCol().Contains(toName[person]))
-            {
-                if (!delegateByPoliticians.ContainsKey("Независим общински съветник"))
-                {
-                    delegateByPoliticians.Add("Независим общински съветник", new List<string>());
-                }
-                delegateByPoliticians["Независим общински съветник"].Add(toName[person]);
             }
         }
         public static string PathToStorageFile()
